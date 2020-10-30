@@ -24,6 +24,7 @@ public class LoginController implements Initializable {
 
     private final String copyRightSymbol = "\u00a9";
     private Bank bank;
+    private Employee employeeLoggedIn;
 
     @FXML
     private Text copyRightLabel;
@@ -69,6 +70,7 @@ public class LoginController implements Initializable {
     public void ifLoginAreCorrectAdmin(){
         for (Employee e : bank.getEmployeeList()) {
             if (Integer.parseInt(adminID.getText()) == e.getEmployeeID() && Integer.parseInt(adminCode.getText()) == e.getEmployeeCode()) {
+                this.employeeLoggedIn = e;
                 loadAdminView();
             } else {
                 System.out.println("funkar ej admin");
@@ -98,7 +100,7 @@ public class LoginController implements Initializable {
             Stage stage = (Stage) customerLoginButton.getScene().getWindow();
             stage.close();
 
-            userLogin = FXMLLoader.load(getClass().getClassLoader().getResource("view/CustomerMain.fxml"));
+            userLogin = FXMLLoader.load(getClass().getClassLoader().getResource("view/customer/CustomerMain.fxml"));
             stage = new Stage();
             stage.setTitle("Member");
             stage.setResizable(false);
@@ -117,7 +119,7 @@ public class LoginController implements Initializable {
             Stage stage = (Stage) adminLoginButton.getScene().getWindow();
             stage.close();
 
-            userLogin = FXMLLoader.load(getClass().getClassLoader().getResource("view/AdminMain.fxml"));
+            userLogin = FXMLLoader.load(getClass().getClassLoader().getResource("view/admin/AdminMain.fxml"));
             stage = new Stage();
             stage.setTitle("Member");
             stage.setResizable(false);
@@ -132,6 +134,10 @@ public class LoginController implements Initializable {
 
     public TextField getPersonalNumberInput() {
         return personalNumberInput;
+    }
+
+    public Employee getEmployeeLoggedIn() {
+        return employeeLoggedIn;
     }
 
 }

@@ -96,7 +96,7 @@
     -fx-font-size: 18;
     -fx-text-fill: BLACK;
 }
-/*------------------------------- Customer Start Screen ----------------------------*/
+/*---------------------------- Customer Start Screen -----------------------------------*/
 #messagePane{
     -fx-background-color: #BCBCBC;
 }
@@ -110,5 +110,29 @@
 }
 #welcomeTitle{
     -fx-font-size: 40;
+    -fx-font-weight: BOLD;
+}
+/*--------------------------------- Admin main ------------------------------------------*/
+#adminMainAnchorPane{
+    -fx-background-color: WHITE;
+}
+/*----------------------------- Admin New Customer --------------------------------------*/
+#regNewCustomerLabel{
+    -fx-font-size: 30;
+    -fx-font-weight: BOLD;
+}
+#newCustomerLabel{
+    -fx-font-size: 16;
+}
+#deleteCustomerButton{
+    -fx-background-color: #FD3B3B;
+    -fx-text-fill: WHITE;
+    -fx-font-size: 16;
+    -fx-font-weight: BOLD;
+}
+#employeeIDLabel{
+    -fx-text-fill: #FD3B3B;
+}
+#showLoanButtons{
     -fx-font-weight: BOLD;
 }

@@ -9,18 +9,18 @@ public class Loan {
     private double amount;
     private double remainingAmount;
     private double interestRate;
-    private double monthlyPayment;
+    private double amortization;
     private LocalDate loanDate;
     private List<LoanChanges> loanChanges;
 
     public Loan(){}
 
-    public Loan(int loanID, double amount, double remainingAmount, double interestRate, double monthlyPayment) {
+    public Loan(int loanID, double amount, double remainingAmount, double interestRate, double amortization) {
         this.loanID = loanID;
         this.amount = amount;
         this.remainingAmount = remainingAmount;
         this.interestRate = interestRate;
-        this.monthlyPayment = monthlyPayment;
+        this.amortization = amortization;
         this.loanDate = LocalDate.now();
         this.loanChanges = new ArrayList<>();
     }
@@ -57,12 +57,12 @@ public class Loan {
         this.interestRate = interestRate;
     }
 
-    public double getMonthlyPayment() {
-        return monthlyPayment;
+    public double getAmortization() {
+        return amortization;
     }
 
-    public void setMonthlyPayment(double monthlyPayment) {
-        this.monthlyPayment = monthlyPayment;
+    public void setAmortization(double monthlyPayment) {
+        this.amortization = monthlyPayment;
     }
 
     public LocalDate getLoanDate() {

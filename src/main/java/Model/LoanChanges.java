@@ -8,8 +8,8 @@ public class LoanChanges {
     private Employee admin;
     private double newInterestRate;
 
-    public LoanChanges(LocalDate dateOfChanges, Employee admin, double newInterestRate) {
-        this.dateOfChanges = dateOfChanges;
+    public LoanChanges(Employee admin, double newInterestRate) {
+        this.dateOfChanges = LocalDate.now();
         this.admin = admin;
         this.newInterestRate = newInterestRate;
     }
@@ -38,4 +38,12 @@ public class LoanChanges {
         this.newInterestRate = newInterestRate;
     }
 
+    @Override
+    public String toString() {
+        return "LoanChanges{" +
+                "dateOfChanges=" + dateOfChanges +
+                ", admin=" + admin.getFirstName() +
+                ", newInterestRate=" + newInterestRate +
+                '}';
+    }
 }

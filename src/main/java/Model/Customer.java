@@ -5,14 +5,16 @@ import java.util.List;
 
 public class Customer extends Person{
 
+    private String phoneNumber;
     private int customerId;
     private int pin;
 
     private List<Account> accounts = new ArrayList<>();
     private List<Loan> loans = new ArrayList<>();
 
-    public Customer(String firstName, String lastName, String socialSecurityNumber, int customerId, int pin) {
+    public Customer(String firstName, String lastName, String socialSecurityNumber,String phoneNumber, int customerId, int pin) {
         super(firstName, lastName, socialSecurityNumber);
+        this.phoneNumber = phoneNumber;
         this.customerId = customerId;
         this.pin = pin;
 

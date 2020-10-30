@@ -26,4 +26,6 @@ public class Employee extends Person{
     public void setEmployeeCode(int employeeCode) {
         this.employeeCode = employeeCode;
     }
+
+
 }

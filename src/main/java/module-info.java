@@ -4,9 +4,13 @@ module sample{
     requires javafx.fxml;
 
     opens AdminProgram;
+    opens AdminProgram.Controller;
     opens CustomerProgram;
     opens CustomerProgram.Controller;
     opens LoginProgram;
     opens LoginProgram.Controller;
-    opens view;
+    opens view.admin;
+    opens view.customer;
+    opens view.login;
+
 }
