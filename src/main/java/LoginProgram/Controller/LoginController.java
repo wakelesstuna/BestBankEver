@@ -22,8 +22,7 @@ import java.util.ResourceBundle;
 
 public class LoginController implements Initializable {
 
-    private final String copyRightSymbol = "\u00a9";
-    private Bank bank;
+    private Bank bank = new Bank();
     private Employee employeeLoggedIn;
 
     @FXML
@@ -57,8 +56,7 @@ public class LoginController implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         String dateTime = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"));
         dateTimeLabel.setText(dateTime);
-        copyRightLabel.setText(copyRightSymbol + " Best Bank Ever AB (publ)");
-        this.bank = new Bank();
+        copyRightLabel.setText(bank.getCopyRightSymbol() + " Best Bank Ever AB (publ)");
     }
 
     public void makeTextRed(){

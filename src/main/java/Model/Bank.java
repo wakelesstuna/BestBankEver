@@ -13,6 +13,7 @@ public class Bank implements Serializable {
 
     List<Employee> employeeList = new ArrayList<>();
     List<Customer> customerList = new ArrayList<>();
+    private final String copyRightSymbol = "\u00a9";
 
     Loan loan1 = new Loan(1234, 25000, 25000, 2, 500);
     Loan loan2 = new Loan(4321, 25000, 22000, 1, 546);
@@ -27,7 +28,7 @@ public class Bank implements Serializable {
     private Customer customer1 = new Customer("Oscar", "Forss", "910910XXXX", "0709314079", 123456, 1234);
 
     public Bank() {
-        customer1.getLoans().add(loan1);
+        /*customer1.getLoans().add(loan1);
         customer1.getLoans().add(loan2);
         customer1.getLoans().add(loan3);
         customer1.getLoans().add(loan4);
@@ -38,7 +39,7 @@ public class Bank implements Serializable {
 
         employeeList.add(HeadOfBank);
         customerList.add(customer1);
-        serialize();
+        serialize();*/
         deSerialize();
     }
 
@@ -84,6 +85,10 @@ public class Bank implements Serializable {
         } catch (Exception e) {
             System.out.println("customerList not found");
         }
+    }
+
+    public String getCopyRightSymbol() {
+        return copyRightSymbol;
     }
 
     public List<Employee> getEmployeeList() {

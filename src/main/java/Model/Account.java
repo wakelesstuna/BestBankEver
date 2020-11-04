@@ -8,16 +8,16 @@ public class Account implements Serializable {
     private int accountId;
     private int accountNumber;
     private int customerId;
-    private double amount;
+    private double balance;
     private double interestRate;
     private String accountType;
     private List<Transaction> transactions;
 
-    public Account(int accountId, int accountNumber, int customerId, double amount, double interestRate, String accountType) {
+    public Account(int accountId, int accountNumber, int customerId, double balance, double interestRate, String accountType) {
         this.accountId = accountId;
         this.accountNumber = accountNumber;
         this.customerId = customerId;
-        this.amount = amount;
+        this.balance = balance;
         this.interestRate = interestRate;
         this.accountType = accountType;
         this.transactions = new ArrayList<>();
@@ -49,12 +49,12 @@ public class Account implements Serializable {
         this.accountId = accountId;
     }
 
-    public double getAmount() {
-        return amount;
+    public double getBalance() {
+        return balance;
     }
 
-    public void setAmount(double amount) {
-        this.amount = amount;
+    public void setBalance(double balance) {
+        this.balance = balance;
     }
 
     public double getInterestRate() {

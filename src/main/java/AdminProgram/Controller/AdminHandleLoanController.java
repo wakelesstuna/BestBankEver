@@ -8,16 +8,22 @@ import javafx.beans.property.SimpleObjectProperty;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.paint.Color;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.net.URL;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.ResourceBundle;
 
-public class AdminHandleLoanController {
+public class AdminHandleLoanController implements Initializable {
 
     Bank bank = new Bank();
     LoginController login = new LoginController();
@@ -90,6 +96,19 @@ public class AdminHandleLoanController {
 
     @FXML
     private TextField loanRemainingAmountOutput;
+
+    @FXML
+    private Text dateTimeLabel;
+
+    @FXML
+    private Text copyRightLabel;
+
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+        String dateTime = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"));
+        dateTimeLabel.setText(dateTime);
+        copyRightLabel.setText(bank.getCopyRightSymbol() + " Best Bank Ever AB (publ)");
+    }
 
     public void displayLoansToTable() {
         bank.deSerialize();

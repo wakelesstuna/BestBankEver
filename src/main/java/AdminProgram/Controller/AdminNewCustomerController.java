@@ -5,16 +5,22 @@ import Model.Customer;
 import Model.Util;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.paint.Color;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.net.URL;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.ResourceBundle;
 
-public class AdminNewCustomerController {
+public class AdminNewCustomerController implements Initializable {
 
     Bank bank = new Bank();
     Util u = new Util();
@@ -55,6 +61,19 @@ public class AdminNewCustomerController {
     @FXML
     private TextField delSocialSecurityNumber;
 
+    @FXML
+    private Text dateTimeLabel;
+
+    @FXML
+    private Text copyRightLabel;
+
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+        String dateTime = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"));
+        dateTimeLabel.setText(dateTime);
+        copyRightLabel.setText(bank.getCopyRightSymbol() + " Best Bank Ever AB (publ)");
+    }
+
 
     public void createCustomer(){
         bank.deSerialize();
@@ -67,9 +86,10 @@ public class AdminNewCustomerController {
         }
         if (u.findCustomerIfThereIsCustomerWithSSC(bank.getCustomerList(), socialSecurityNumber.getText()) == 1){
             notAllFieldsInputLabel.setText("Person med " + socialSecurityNumber.getText() + " finns redan som kund");
+        }else {
+            bank.getCustomerList().add(c);
+            bank.serialize();
         }
-        bank.getCustomerList().add(c);
-        bank.serialize();
         System.out.println("new customer created");
     }
 
