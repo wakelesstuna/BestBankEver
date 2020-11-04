@@ -18,7 +18,7 @@ public class Util {
             Stage stage = (Stage) logOutLabel.getScene().getWindow();
             stage.close();
 
-            Parent userLogin = FXMLLoader.load(getClass().getClassLoader().getResource("view/admin/" + FXMLFileName + ".fxml"));
+            Parent userLogin = FXMLLoader.load(getClass().getClassLoader().getResource("view/" + FXMLFileName + ".fxml"));
             stage = new Stage();
             stage.setResizable(false);
             stage.setScene(new Scene(userLogin));

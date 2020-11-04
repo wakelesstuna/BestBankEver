@@ -2,6 +2,7 @@ package AdminProgram.Controller;
 
 import Model.Bank;
 import Model.Util;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -56,21 +57,19 @@ public class AdminMainController implements Initializable {
     public void showErrorMessage(){ u.loadErrorMessage(); }
 
     //--------------------------- Handle Customer Info --------------------------------\\
-    public void handleCustomerInfo(){ u.loadViews("AdminHandleLoan", logOutLabel); }
+    public void handleCustomerInfo(){ u.loadViews("admin/AdminHandleLoan", logOutLabel); }
 
-    //-------------------------------- Handle Loan ------------------------------------\\
-    public void handleLoan() {
-        u.loadViews("AdminHandleLoan", logOutLabel);
-    }
+    //--------------------------- Handle Customer Info --------------------------------\\
+    public void handleLoan(){ u.loadViews("admin/AdminHandleLoan", logOutLabel); }
 
     //------------------------------- Handle Account ----------------------------------\\
     public void handleAccount() {
-        u.loadViews("AdminHandleAccount", logOutLabel);
+        u.loadViews("admin/AdminHandleAccount", logOutLabel);
     }
 
     //------------------------ New Customer/Delete Customer ----------------------------\\
     public void newCustomer() {
-        u.loadViews("AdminNewCustomer", logOutLabel);
+        u.loadViews("admin/AdminNewCustomer", logOutLabel);
     }
 
     //-------------------------------- Logout Button ----------------------------------\\
@@ -84,7 +83,7 @@ public class AdminMainController implements Initializable {
     }
 
     public void logout() {
-        u.loadViews("Login", logOutLabel);
+        u.loadViews("login/Login", logOutLabel);
     }
 
 }
