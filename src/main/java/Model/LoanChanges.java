@@ -1,8 +1,9 @@
 package Model;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 
-public class LoanChanges {
+public class LoanChanges implements Serializable{
 
     private LocalDate dateOfChanges;
     private Employee admin;

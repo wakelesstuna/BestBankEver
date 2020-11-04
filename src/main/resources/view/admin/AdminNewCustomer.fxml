@@ -305,10 +305,15 @@
                                   <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                                 </rowConstraints>
                                  <children>
-                                    <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="90.0" text="Avbryt" GridPane.halignment="RIGHT" GridPane.valignment="CENTER" />
+                                    <Button mnemonicParsing="false" onAction="#clearAllDeleteCustomerFields" prefHeight="25.0" prefWidth="90.0" text="Avbryt" GridPane.halignment="RIGHT" GridPane.valignment="CENTER" />
                                     <Button id="deleteCustomerButton" fx:id="deleteCustomer" mnemonicParsing="false" onAction="#deleteCustomer" prefHeight="30.0" prefWidth="126.0" stylesheets="@../../css/style.css" text="Avsluta kund" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.valignment="CENTER" />
                                  </children>
                               </GridPane>
+                              <Label fx:id="notAllFieldsInputLabel" layoutX="180.0" layoutY="279.0" prefHeight="17.0" prefWidth="307.0" textFill="#ff0909">
+                                 <font>
+                                    <Font size="13.0" />
+                                 </font>
+                              </Label>
                                     </children>
                                 </AnchorPane>
                             </content>

@@ -65,19 +65,13 @@ public class AdminHandleLoanController {
     private Label loanIdLabel;
 
     @FXML
-    private Button getLoanButton;
-
-    @FXML
-    private Button changeInterestRateButton;
-
-    @FXML
     private TextField changeRateInput;
 
     @FXML
     private TextField employeeIdInput;
 
     @FXML
-    private Label employeeIDLabel;
+    private Label employeeIDChangeRateLabel;
 
     @FXML
     private TextField loanIdOutput;
@@ -98,21 +92,19 @@ public class AdminHandleLoanController {
     private TextField loanRemainingAmountOutput;
 
     public void displayLoansToTable() {
+        bank.deSerialize();
+        loansOverview.getItems().clear();
         for (Customer c : bank.getCustomerList()) {
             if (customerSocialSecurityNumber.getText().equals(c.getSocialSecurityNumber())) {
                 this.c = c;
-                for (Loan l : c.getLoans()) {
+                loanIdCol.setCellValueFactory(loan -> new SimpleIntegerProperty(loan.getValue().getLoanID()).asObject());
+                loanDateCol.setCellValueFactory(loan -> new SimpleObjectProperty<>(loan.getValue().getLoanDate()));
+                loanAmountCol.setCellValueFactory(loan -> new SimpleDoubleProperty(loan.getValue().getAmount()).asObject());
+                interestRateCol.setCellValueFactory(loan -> new SimpleDoubleProperty(loan.getValue().getInterestRate()).asObject());
+                amortizationCol.setCellValueFactory(loan -> new SimpleDoubleProperty(loan.getValue().getAmortization()).asObject());
+                loanRemainingAmountCol.setCellValueFactory(loan -> new SimpleDoubleProperty(loan.getValue().getRemainingAmount()).asObject());
 
-                    loanIdCol.setCellValueFactory(loan -> new SimpleIntegerProperty(loan.getValue().getLoanID()).asObject());
-                    loanDateCol.setCellValueFactory(loan -> new SimpleObjectProperty<>(loan.getValue().getLoanDate()));
-                    loanAmountCol.setCellValueFactory(loan -> new SimpleDoubleProperty(loan.getValue().getAmount()).asObject());
-                    interestRateCol.setCellValueFactory(loan -> new SimpleDoubleProperty(loan.getValue().getInterestRate()).asObject());
-                    amortizationCol.setCellValueFactory(loan -> new SimpleDoubleProperty(loan.getValue().getAmortization()).asObject());
-                    loanRemainingAmountCol.setCellValueFactory(loan -> new SimpleDoubleProperty(loan.getValue().getRemainingAmount()).asObject());
-
-                    loansOverview.setItems(FXCollections.observableList(c.getLoans()));
-                    System.out.println(l.getLoanID());
-                }
+                loansOverview.setItems(FXCollections.observableList(c.getLoans()));
             }
         }
     }
@@ -133,43 +125,48 @@ public class AdminHandleLoanController {
                 loanIdLabel.setText("");
                 break;
             }
-        }if (!bool){
+        }
+        if (!bool) {
             loanIdLabel.setText("Du har mata in ett felaktigt LånID");
         }
 
     }
 
-    public void changeInterestRateOnLoan(){
+    public void changeInterestRateOnLoan() {
         int loggedInEmployee;
         double newRate = Double.parseDouble(changeRateInput.getText());
-        if (employeeIdInput.getText().isEmpty()){
-            employeeIDLabel.setTextFill(Color.RED);
-            employeeIDLabel.setText("Du måste fylla i ett AnställningsID för att kunna ändra ränta");
-        }else if (Integer.parseInt(employeeIdInput.getText()) == findEmployeeID()){
+        if (employeeIdInput.getText().isEmpty()) {
+            employeeIDChangeRateLabel.setTextFill(Color.RED);
+            employeeIDChangeRateLabel.setText("Du måste fylla i ett AnställningsID för att kunna ändra ränta");
+        } else if (Integer.parseInt(employeeIdInput.getText()) == findEmployeeID()) {
             loggedInEmployee = Integer.parseInt(employeeIdInput.getText());
             c.getLoans().get(selectedLoanIndex).setInterestRate(newRate);
             c.getLoans().get(selectedLoanIndex).getLoanChanges().add(new LoanChanges(bank.getEmployeeList().get(getEmployeeIndexInList(loggedInEmployee)), newRate));
+            employeeIDChangeRateLabel.setTextFill(Color.GREEN);
+            employeeIDChangeRateLabel.setText("Räntan ändrad till 3%");
         }
+        System.out.println(c.getLoans().get(selectedLoanIndex).getInterestRate());
         System.out.println(c.getLoans().get(selectedLoanIndex).getLoanChanges().toString());
+
+        bank.serialize();
     }
 
-    public int getEmployeeIndexInList(int employeeID){
+    public int getEmployeeIndexInList(int employeeID) {
         int index = 0;
         for (int i = 0; i < bank.getEmployeeList().size(); i++) {
-            if (employeeID == bank.getEmployeeList().get(i).getEmployeeID()){
+            if (employeeID == bank.getEmployeeList().get(i).getEmployeeID()) {
                 index = i;
             }
         }
         return index;
     }
 
-    public int findEmployeeID(){
+    public int findEmployeeID() {
         for (Employee e : bank.getEmployeeList()) {
             return e.getEmployeeID();
         }
         return 0;
     }
-
 
 
     //-------------------------------- Logout Button ----------------------------------\\

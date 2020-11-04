@@ -207,7 +207,7 @@
                                        </GridPane.margin>
                                     </TextField>
                                     <Label id="newCustomerLabel" prefHeight="25.0" prefWidth="112.0" stylesheets="@../../css/style.css" text="AnställningID:" GridPane.rowIndex="1" />
-                                    <Label id="employeeIDLabel" fx:id="employeeIDLabel" prefHeight="17.0" prefWidth="179.0" stylesheets="@../../css/style.css" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                                    <Label id="employeeIDLabel" fx:id="employeeIDChangeRateLabel" prefHeight="17.0" prefWidth="179.0" stylesheets="@../../css/style.css" GridPane.columnIndex="1" GridPane.rowIndex="2" />
                                  </children>
                               </GridPane>
                               <Label fx:id="loanIdLabel" layoutX="119.0" layoutY="509.0" prefHeight="17.0" prefWidth="247.0" textFill="#fc0202" />

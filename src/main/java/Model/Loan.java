@@ -1,10 +1,11 @@
 package Model;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Loan {
+public class Loan implements Serializable {
     private int loanID;
     private double amount;
     private double remainingAmount;

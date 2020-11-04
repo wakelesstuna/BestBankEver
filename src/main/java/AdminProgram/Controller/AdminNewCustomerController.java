@@ -2,11 +2,11 @@ package AdminProgram.Controller;
 
 import Model.Bank;
 import Model.Customer;
+import Model.Util;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.paint.Color;
@@ -17,6 +17,7 @@ import java.io.IOException;
 public class AdminNewCustomerController {
 
     Bank bank = new Bank();
+    Util u = new Util();
 
     @FXML
     private Label logOutLabel;
@@ -40,6 +41,9 @@ public class AdminNewCustomerController {
     private TextField pinCode;
 
     @FXML
+    private Label notAllFieldsInputLabel;
+
+    @FXML
     private TextField delFirstName;
 
     @FXML
@@ -53,9 +57,20 @@ public class AdminNewCustomerController {
 
 
     public void createCustomer(){
-        Customer c = new Customer(firstName.getText(), lastName.getText(), socialSecurityNumber.getText(),
+        bank.deSerialize();
+        Customer c = null;
+        try{
+        c = new Customer(firstName.getText(), lastName.getText(), socialSecurityNumber.getText(),
                 phoneNumber.getText(), Integer.parseInt(customerID.getText()), Integer.parseInt(pinCode.getText()));
+        }catch (NumberFormatException e){
+            notAllFieldsInputLabel.setText("Du måste fylla i alla fält för att skapa en kund");
+        }
+        if (u.findCustomerIfThereIsCustomerWithSSC(bank.getCustomerList(), socialSecurityNumber.getText()) == 1){
+            notAllFieldsInputLabel.setText("Person med " + socialSecurityNumber.getText() + " finns redan som kund");
+        }
         bank.getCustomerList().add(c);
+        bank.serialize();
+        System.out.println("new customer created");
     }
 
     public void clearAllNewCustomerFields(){
@@ -65,6 +80,7 @@ public class AdminNewCustomerController {
         phoneNumber.setText(null);
         customerID.setText(null);
         pinCode.setText(null);
+        notAllFieldsInputLabel.setText("");
     }
 
     public void deleteCustomer(){
@@ -84,7 +100,11 @@ public class AdminNewCustomerController {
     }
 
     public void clearAllDeleteCustomerFields(){
-
+        delFirstName.setText("");
+        delLastName.setText("");
+        delCustomerID.setText("");
+        delSocialSecurityNumber.setText("");
+        notAllFieldsInputLabel.setText("");
     }
 
 
@@ -105,7 +125,7 @@ public class AdminNewCustomerController {
             Stage stage = (Stage) logOutLabel.getScene().getWindow();
             stage.close();
 
-            Parent userLogin = FXMLLoader.load(getClass().getClassLoader().getResource("view/admin/Login.fxml"));
+            Parent userLogin = FXMLLoader.load(getClass().getClassLoader().getResource("view/login/Login.fxml"));
             stage = new Stage();
             stage.setTitle("Member");
             stage.setResizable(false);
